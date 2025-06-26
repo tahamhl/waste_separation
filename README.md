@@ -126,6 +126,43 @@ python app.py
 - Web arayüzüne erişim:  
   `http://localhost:5000/` veya ağ üzerinden `http://<bilgisayar_ip_adresi>:5000/`
 
+### 🗄️ MySQL Veritabanı Kurulumu ve Bağlantı
+
+Bu proje, tespit edilen nesneleri kaydetmek için bir MySQL veritabanı kullanır. Aşağıdaki adımları izleyerek veritabanı bağlantısını kurabilirsiniz:
+
+### 1. MySQL Veritabanı Oluşturma
+
+Öncelikle bir MySQL veritabanı oluşturun (örneğin: `bitirme`).
+
+```sql
+CREATE DATABASE bitirme;
+```
+
+### 2. Tespitler Tablosunu Oluşturma
+
+Aşağıdaki SQL komutunu kullanarak tespitlerin kaydedileceği tabloyu oluşturun:
+
+```sql
+CREATE TABLE tespitler (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nesne_turu VARCHAR(50),
+    tespit_zamani DATETIME
+);
+```
+
+### 3. Bağlantı Ayarları
+
+`app.py` dosyasında aşağıdaki ayarları kendi MySQL bilgilerinizle güncelleyin:
+
+```python
+app.config['MYSQL_HOST'] = '127.0.0.1'      # MySQL sunucu adresi
+app.config['MYSQL_USER'] = 'root'           # MySQL kullanıcı adı
+app.config['MYSQL_PASSWORD'] = ''           # MySQL şifresi (varsayılan: boş)
+app.config['MYSQL_DB'] = 'bitirme'          # Oluşturduğunuz veritabanı adı
+```
+
+> **Not:** Laragon gibi yerel sunucularda şifre genellikle boştur. Kendi şifrenizi kullanıyorsanız bu alanı güncellemeyi unutmayın.
+
 ---
 
 ## ⚙️ Kullanım
@@ -184,6 +221,22 @@ NESNE_ACI_MAP = {
 
 ---
 
+<<<<<<< HEAD
+=======
+## 📣 Lisans
+
+MIT License
+
+Copyright (c) 2025 Mehmet Taha Mehel
+
+İzin, bu yazılımın ve ilgili dokümantasyon dosyalarının ("Yazılım") bir kopyasını, Yazılımın kısıtlama olmaksızın kullanılması, kopyalanması, değiştirilmesi, birleştirilmesi, yayımlanması, dağıtılması, alt lisansı verilmesi ve/veya satılması için ücretsiz olarak verilmiştir ve Yazılımın sağlandığı kişilere aşağıdaki koşullara tabi olarak bunu yapma izni verilir:
+
+Yukarıdaki telif hakkı bildirimi ve bu izin bildirimi, Yazılımın tüm kopyalarına veya önemli bölümlerine eklenmelidir.
+
+YAZILIM "OLDUĞU GİBİ" SAĞLANMAKTADIR, AÇIK VEYA ZIMNİ HİÇBİR GARANTİ VERİLMEMEKTEDİR; bunlara PAZARLANABİLİRLİK, BELİRLİ BİR AMACA UYGUNLUK ve İHLAL ETMEME garantileri dahildir ancak bunlarla sınırlı değildir. Hiçbir durumda yazarlar veya telif hakkı sahipleri, Yazılımdan veya Yazılımın kullanılmasından ya da başka şekillerde Yazılımla ilgili ortaya çıkan hiçbir iddia, zarar veya diğer yükümlülüklerden sorumlu tutulamazlar.
+
+---
+>>>>>>> 9aed7e7 (README ve LICENSE dosyaları eklendi/güncellendi)
 
 ## ✨ Geliştirici
 
