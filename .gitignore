@@ -18,6 +18,8 @@ venv/
 yolov5/runs/
 *.pt
 *.pth
+*.h5
+*.onnx
 
 # OS
 .DS_Store
@@ -25,4 +27,11 @@ Thumbs.db
 
 # Diğer
 *.db
-*.sqlite3 
+*.sqlite3
+# Kişisel ayarlar ve IDE dosyaları
+.idea/
+*.log
+
+# Kişisel ayarlar ve IDE dosyaları
+.idea/
+*.log 
