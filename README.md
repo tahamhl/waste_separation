@@ -221,8 +221,23 @@ NESNE_ACI_MAP = {
 
 ---
 
-<<<<<<< HEAD
-=======
+### 🏷️ Model Ağırlıkları (`best.pt`) Nasıl Eklenir?
+
+- YOLOv5 ile eğitilmiş model ağırlığı dosyası (`best.pt`) repoya eklenmemiştir. Aşağıdaki bağlantıdan indirebilirsiniz:
+
+  [best.pt dosyasını indir (Google Drive)](https://drive.google.com/file/d/1jMTDqLdhhCDqrbttOtkp7aoP_5X5YrbG/view?usp=sharing)
+
+- İndirdikten sonra, dosyayı şu dizine yerleştirin:
+  ```
+  yolov5/runs/train/exp4/weights/best.pt
+  ```
+- Eğer `weights` veya `exp4` klasörleri yoksa, kendiniz oluşturabilirsiniz.
+- Uygulama başlatıldığında model otomatik olarak bu dosyayı kullanacaktır.
+
+> **Not:** Model dosyası büyük boyutlu olduğu için doğrudan GitHub repoya eklenmemiştir.
+
+---
+
 ## 📣 Lisans
 
 MIT License
@@ -236,7 +251,6 @@ Yukarıdaki telif hakkı bildirimi ve bu izin bildirimi, Yazılımın tüm kopya
 YAZILIM "OLDUĞU GİBİ" SAĞLANMAKTADIR, AÇIK VEYA ZIMNİ HİÇBİR GARANTİ VERİLMEMEKTEDİR; bunlara PAZARLANABİLİRLİK, BELİRLİ BİR AMACA UYGUNLUK ve İHLAL ETMEME garantileri dahildir ancak bunlarla sınırlı değildir. Hiçbir durumda yazarlar veya telif hakkı sahipleri, Yazılımdan veya Yazılımın kullanılmasından ya da başka şekillerde Yazılımla ilgili ortaya çıkan hiçbir iddia, zarar veya diğer yükümlülüklerden sorumlu tutulamazlar.
 
 ---
->>>>>>> 9aed7e7 (README ve LICENSE dosyaları eklendi/güncellendi)
 
 ## ✨ Geliştirici
 
