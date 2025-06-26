@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çöp Farkındalığı</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e9fbe5 0%, #b6e2c6 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .awareness-img {
+            max-width: 350px;
+            width: 100%;
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 24px rgba(34,139,34,0.13);
+            margin-bottom: 1.5rem;
+            border: 4px solid #4caf50;
+            background: #fff;
+            padding: 0.5rem;
+            transition: box-shadow 0.3s;
+        }
+        .awareness-img:hover {
+            box-shadow: 0 12px 32px rgba(34,139,34,0.22);
+        }
+        .awareness-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 18px rgba(76,175,80,0.10);
+            padding: 2.5rem 2rem 2rem 2rem;
+            margin-top: 2rem;
+            border-left: 8px solid #43a047;
+        }
+        h1 {
+            color: #388e3c;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        h2 {
+            color: #43a047;
+            font-weight: 600;
+            margin-top: 1.5rem;
+        }
+        ul, p {
+            color: #2e7d32;
+            font-size: 1.08rem;
+        }
+        .btn-green {
+            background: linear-gradient(90deg, #43a047 0%, #66bb6a 100%);
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            border-radius: 2rem;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(76,175,80,0.13);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .btn-green:hover {
+            background: linear-gradient(90deg, #388e3c 0%, #43a047 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(76,175,80,0.18);
+        }
+        .leaf {
+            position: absolute;
+            width: 60px;
+            opacity: 0.13;
+            z-index: 0;
+        }
+        .leaf1 { top: 30px; left: 10vw; transform: rotate(-15deg); }
+        .leaf2 { bottom: 40px; right: 12vw; transform: rotate(20deg); }
+    </style>
+</head>
+<body>
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909765.png" class="leaf leaf1" alt="leaf">
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909765.png" class="leaf leaf2" alt="leaf">
+    <div class="container my-5 position-relative" style="z-index:1;">
+        <div class="text-center">
+            <h1>Çöp Farkındalığı</h1>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9CLdV383aUFM93klONo6asU6TAlHJHPlxNA&s" alt="Çöp Farkındalığı" class="awareness-img">
+        </div>
+        <div class="awareness-section">
+            <h2>Neden Çöp Ayrıştırma Önemlidir?</h2>
+            <p>
+                Doğru çöp ayrıştırma, çevre kirliliğinin önlenmesi ve doğal kaynakların korunması için kritik bir adımdır. Geri dönüştürülebilir atıkların diğer atıklardan ayrılması, hem enerji tasarrufu sağlar hem de atık miktarını azaltır. Özellikle plastik, cam, metal ve kağıt gibi malzemeler geri dönüşümle tekrar kullanılabilir hale gelir.
+            </p>
+            <h2>Çöplerin Doğaya Zararları</h2>
+            <p>
+                Doğaya atılan çöpler, toprak ve su kirliliğine yol açar. Plastik atıklar, deniz canlıları ve kuşlar için ölümcül olabilir. Organik atıkların kontrolsüz bir şekilde doğaya bırakılması ise metan gazı salınımına ve iklim değişikliğine katkı sağlar.
+            </p>
+            <h2>Geri Dönüşümün Faydaları</h2>
+            <ul>
+                <li>Enerji ve hammadde tasarrufu sağlar.</li>
+                <li>Çevre kirliliğini azaltır.</li>
+                <li>Ekonomiye katkı sağlar, yeni iş alanları oluşturur.</li>
+                <li>Doğal kaynakların korunmasına yardımcı olur.</li>
+            </ul>
+            <h2>Evde Neler Yapabiliriz?</h2>
+            <ul>
+                <li>Çöplerimizi türlerine göre ayırarak geri dönüşüm kutularına atabiliriz.</li>
+                <li>Tek kullanımlık ürünler yerine tekrar kullanılabilir ürünler tercih edebiliriz.</li>
+                <li>Organik atıkları kompost yaparak değerlendirebiliriz.</li>
+                <li>Çevremizdeki insanları çöp ayrıştırma konusunda bilinçlendirebiliriz.</li>
+            </ul>
+            <h2>Unutmayalım!</h2>
+            <p>
+                Her bireyin atık yönetimi konusunda göstereceği küçük bir çaba, büyük bir çevresel fark yaratır. Gelecek nesillere daha temiz ve yaşanabilir bir dünya bırakmak için çöplerimizi ayrıştırmayı unutmayalım.
+            </p>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-green">Ana Sayfaya Dön</a>
+        </div>
+    </div>
+</body>
+</html> 

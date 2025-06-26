@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tespit Geçmişi - Görüntü İşleme ve Robotik Destekli Çöp Sınıflandırma ve Boşaltma Sistemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .container { max-width: 900px; }
+        .card { border: none; border-radius: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .card-header { background-color: #0d6efd; color: white; font-weight: bold; border-top-left-radius: 1rem; border-top-right-radius: 1rem; }
+        .table { vertical-align: middle; }
+        .footer { padding: 1rem 0; margin-top: 2rem; background-color: #e9ecef; text-align: center; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Tespit Geçmişi İstatistikleri</h4>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 mb-4">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Tespit Geçmişi</h2>
+            </div>
+            <div class="card-body">
+                {% if detections %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nesne Türü</th>
+                                    <th scope="col">Tespit Zamanı</th>
+                                    <th scope="col" class="text-center">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for detection in detections %}
+                                <tr id="row-{{ detection.id }}">
+                                    <th scope="row">{{ loop.index }}</th>
+                                    <td>{{ detection.nesne_turu }}</td>
+                                    <td>{{ detection.tespit_zamani.strftime('%d-%m-%Y %H:%M:%S') }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-danger btn-sm" onclick="deleteDetection({{ detection.id }})">Sil</button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-center">Henüz kaydedilmiş bir tespit bulunmamaktadır.</p>
+                {% endif %}
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">Ana Sayfaya Dön</a>
+                    <div>
+                        {% if detections %}
+                        <button class="btn btn-danger me-2" onclick="deleteAllDetections()">Tüm Geçmişi Sil</button>
+                        {% endif %}
+                        <button class="btn btn-success" onclick="exportHistory()">Geçmişi JSON Olarak Aktar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <footer class="footer">
+        <p>&copy; 2024 - Görüntü İşleme ve Robotik Destekli Çöp Sınıflandırma ve Boşaltma Sistemi</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Tespit verilerini JS'ye aktar
+        const detections = [
+            {% for detection in detections %}
+            {
+                nesne_turu: "{{ detection.nesne_turu }}",
+                tespit_zamani: "{{ detection.tespit_zamani.strftime('%Y-%m-%d %H:%M:%S') }}"
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ];
+
+        // Nesne türlerine göre oran (Pie Chart)
+        const typeCounts = {};
+        detections.forEach(d => {
+            typeCounts[d.nesne_turu] = (typeCounts[d.nesne_turu] || 0) + 1;
+        });
+        const pieLabels = Object.keys(typeCounts);
+        const pieData = Object.values(typeCounts);
+        const palette = [
+            '#0d6efd', '#198754', '#ffc107', '#dc3545', '#6f42c1', '#fd7e14', '#20c997', '#0dcaf0', '#adb5bd', '#343a40'
+        ];
+        new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: {
+                labels: pieLabels,
+                datasets: [{
+                    data: pieData,
+                    backgroundColor: palette,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        function deleteDetection(id) {
+            if (!confirm('Bu kaydı silmek istediğinizden emin misiniz?')) {
+                return;
+            }
+
+            const options = {
+                method: 'POST'
+            };
+
+            fetch('/delete/' + id, options)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        const row = document.getElementById('row-' + id);
+                        if (row) {
+                            row.remove();
+                        }
+                    } else {
+                        alert('Hata: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    alert('Silme işlemi sırasında bir sunucu hatası oluştu.');
+                });
+        }
+
+        function deleteAllDetections() {
+            if (!confirm('TÜM tespit geçmişini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) {
+                return;
+            }
+
+            const options = {
+                method: 'POST'
+            };
+
+            fetch('/delete_all', options)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Hata: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    alert('Toplu silme işlemi sırasında bir sunucu hatası oluştu.');
+                });
+        }
+
+        function exportHistory() {
+            fetch('/export_history')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const jsonStr = JSON.stringify(data.detections, null, 2);
+                        const blob = new Blob([jsonStr], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'tespit_gecmisi.json';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    } else {
+                        alert('Hata: ' + (data.message || 'Geçmiş dışa aktarılamadı.'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Export Error:', error);
+                    alert('Geçmişi dışa aktarma sırasında bir hata oluştu.');
+                });
+        }
+    </script>
+</body>
+</html> 
