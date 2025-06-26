@@ -3,6 +3,7 @@
 **Akıllı Atık Sınıflandırma ve Otomatik Boşaltma Sistemi**  
 Görüntü İşleme + YOLOv5 + Arduino + Servo Motor + Flask Web Arayüzü  
 > Geliştirici: [tahamhl](https://github.com/tahamhl)
+> Video linki:[https://youtu.be/i5Q1aswaJds]
 
 ---
 
