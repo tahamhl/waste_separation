@@ -1,0 +1,28 @@
+# Python cache ve bytecode dosyaları
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints
+
+# VSCode
+.vscode/
+
+# Virtualenv
+venv/
+.env/
+
+# Model dosyaları ve büyük ağırlıklar
+yolov5/runs/
+*.pt
+*.pth
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Diğer
+*.db
+*.sqlite3 
