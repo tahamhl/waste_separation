@@ -184,11 +184,6 @@ NESNE_ACI_MAP = {
 
 ---
 
-## 📣 Lisans
-
-MIT License
-
----
 
 ## ✨ Geliştirici
 
