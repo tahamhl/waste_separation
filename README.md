@@ -20,7 +20,9 @@ Ayrıca, **Arduino tabanlı donanım** ile fiziksel ayrıştırma ve otomatik bo
 
 ## 📸 Demo
 
-![Demo GIF veya Ekran Görüntüsü buraya ekleyin](demo.gif)
+![chrome_9Zn4v8Fvis](https://github.com/user-attachments/assets/0019624a-8ee6-4a6e-bb1d-061b87249edd)
+
+
 
 ---
 
