@@ -8,7 +8,7 @@ Görüntü İşleme + YOLOv5 + Arduino + Servo Motor + Flask Web Arayüzü
 
 ---
 
-## 🚀 Proje Hakkında
+## 🚀 Proje Hakkında 
 
 Bu proje, atıkların (plastik, metal, cam, kağıt, poşet vb.) **görüntü işleme ve yapay zeka** ile otomatik olarak sınıflandırılması ve uygun hazneye yönlendirilmesini sağlar.  
 Ayrıca, **Arduino tabanlı donanım** ile fiziksel ayrıştırma ve otomatik boşaltma işlemleri gerçekleştirilir.
